@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <body>
-    <button onclick="handleClick()">Click Me</button>
+
+    <button id="HealthCheckButton">生きているか？</button>
+    <div id="results"></div>
+
     <script>
-        function handleClick() {
-            alert("Button clicked!");
+    const API_BASE = 'http://127.0.0.1:8080';
+
+    document.getElementById('HealthCheckButton').addEventListener('click', async () => {
+        try {
+            const response = await fetch(`${API_BASE}/health`);
+
+            const text = await response.text();
+            document.getElementById('results').textContent = text;
+
+        } catch (error) {
+            console.error(error);
         }
+    });
     </script>
 </body>
 </html>
